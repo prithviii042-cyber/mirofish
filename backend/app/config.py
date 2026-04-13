@@ -22,7 +22,11 @@ class Config:
     
     # Flask配置
     SECRET_KEY = os.environ.get('SECRET_KEY', 'mirofish-secret-key')
-    DEBUG = os.environ.get('FLASK_DEBUG', 'True').lower() == 'true'
+    # Default DEBUG=False for production safety; set FLASK_DEBUG=True locally
+    DEBUG = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+
+    # CORS配置 — comma-separated list of allowed origins, or '*' for all
+    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', '*')
     
     # JSON配置 - 禁用ASCII转义，让中文直接显示（而不是 \uXXXX 格式）
     JSON_AS_ASCII = False
